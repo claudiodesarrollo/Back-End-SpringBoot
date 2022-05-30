@@ -19,3 +19,14 @@ INSERT INTO formaciones (instituto,localidad,descripcion,titulo,formacion_id) VA
 INSERT INTO formaciones (instituto,localidad,descripcion,titulo,formacion_id) VALUES ('INTI','San Salvador de Jujuy','Programa Nacional Progrmador Full Stack Jr 12 mese','Argentina Programa - Dev Full Stack','1');
 INSERT INTO formaciones (instituto,localidad,descripcion,titulo,formacion_id) VALUES ('Oracle - Alura ','San Salvador de Jujuy','Progrmama Alura y Oracle Bootcamp 6 mese Dev Full Stack','Aula Latam de Oracle Beca - Dev Full Stack','1');
 
+
+/* Creamos algunos usuarios con sus roles */
+INSERT INTO `usuarios` (username, password, enabled, nombre, apellido, email) VALUES ('claudio','$2a$10$QL9LdfGn7eiV.2lGB8.L6eiFiOkZU.k..o2a2XZm9L29hWWHtNCAe',1, 'Claudio', 'Quipildor','claudioq00@gmail.com');
+INSERT INTO `usuarios` (username, password, enabled, nombre, apellido, email) VALUES ('admin','$2a$10$c30liJU4bZ4mZd894qMybuwoNa8k8q8xmTvNo/ZjZIMSly0MgApTu',1, 'Admin', 'Admin','solutecap@gmail.com');
+
+INSERT INTO `roles` (nombre) VALUES ('ROLE_USER');
+INSERT INTO `roles` (nombre) VALUES ('ROLE_ADMIN');
+
+INSERT INTO `usuarios_roles` (usuario_id, roles_id) VALUES (1, 1);
+INSERT INTO `usuarios_roles` (usuario_id, roles_id) VALUES (2, 2);
+INSERT INTO `usuarios_roles` (usuario_id, roles_id) VALUES (2, 1);
