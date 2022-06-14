@@ -17,6 +17,7 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.karaxtecnologia.porfolio.models.entity.Persona;
 import com.karaxtecnologia.porfolio.models.services.IPersonaService;
 
-@CrossOrigin(origins = { "http://localhost:4200" },allowedHeaders = "*")
+@CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/porfolio")
 public class PersonaRestController {
@@ -50,13 +51,13 @@ public class PersonaRestController {
 	public Persona show(@PathVariable Long id) {
 		return personaService.findById(id);
 	}
-
+	@Secured("ROLE_ADMIN")
 	@PostMapping("personas")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Persona create(@RequestBody Persona persona) {
 		return personaService.save(persona);
 	}
-
+	@Secured("ROLE_ADMIN")
 	@PutMapping("/personas/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Persona update(@RequestBody Persona persona, @PathVariable Long id) {
@@ -77,13 +78,13 @@ public class PersonaRestController {
 
 		return personaService.save(personaActual);
 	}
-
+	@Secured("ROLE_ADMIN")
 	@DeleteMapping("personas/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
 		personaService.delete(id);
 	}
-
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/personas/upload")
 	public ResponseEntity<?> upload(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id") Long id) {
 		Map<String, Object> response = new HashMap<>();

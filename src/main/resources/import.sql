@@ -1,4 +1,4 @@
-INSERT INTO personas (apellido,dni,email,nombre,telefono,acerca,foto) VALUES('Quipildor','33648273','claudioq00@gmail.com','Claudio Angel Ivan','+542964352084','Con mas 10 anos de exprecia en atencion al publico ','d6e54082-db64-4484-b496-f1696b99e59f-2c29f1a5c7b4bf8b150739bdb5069853.jpg');
+INSERT INTO personas (apellido,dni,email,nombre,telefono,acerca,foto) VALUES('Quipildor','33648273','claudioq00@gmail.com','Claudio Angel Ivan','+542964352084','Con mas 10 anos de exprecia en atencion al publico ','8b3a87c7-d9bd-4135-9bd1-f6a0319dcfb9-2c29f1a5c7b4bf8b150739bdb5069853.jpg');
 
 INSERT INTO competencias (habilidad,nivel,porciento,competencia_id) VALUES ('Ingles','Medio','75','1');
 INSERT INTO competencias (habilidad,nivel,porciento,competencia_id) VALUES ('Frances','Bajo','25','1');

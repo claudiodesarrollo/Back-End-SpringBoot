@@ -25,19 +25,18 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 		.antMatchers(HttpMethod.GET
 				,"/porfolio/personas"
 				,"/porfolio/personas/{id}"
-				,"/porfolio/personas/upload"
 				,"/porfolio/uploads/img/**"
 				,"/porfolio/formaciones"
 				,"/porfolio/experiencias"
 				,"/porfolio/competencias"
 				,"/porfolio/proyectos"
 				,"/images/**").permitAll()
-		.antMatchers(
+		/*.antMatchers(
 				"/porfolio/personas/**"			
 				,"/porfolio/formaciones/**"
 				,"/porfolio/experiencias/**"
 				,"/porfolio/competencias/**"
-				,"/porfolio/proyectos/**").hasRole("ADMIN")
+				,"/porfolio/proyectos/**").hasRole("ADMIN")*/
 		
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());

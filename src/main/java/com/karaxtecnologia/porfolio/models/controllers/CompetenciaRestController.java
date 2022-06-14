@@ -1,6 +1,7 @@
 package com.karaxtecnologia.porfolio.models.controllers;
 import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,18 +27,18 @@ public class CompetenciaRestController {
 	public List<Competencia> index(){
 		return competenciaService.findAll();
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/competencias/{id}")
 	public Competencia show(@PathVariable Long id) {
 		return competenciaService.findById(id);
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@PostMapping("competencias")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Competencia create(@RequestBody Competencia competencia) {
 		return competenciaService.save(competencia);
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@PutMapping("/competencias/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Competencia update (@RequestBody Competencia competencia ,@PathVariable Long id){
@@ -47,7 +48,7 @@ public class CompetenciaRestController {
 		competenciaActual.setPorciento(competencia.getPorciento());
 		return competenciaService.save(competenciaActual);
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@DeleteMapping("competencias/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {

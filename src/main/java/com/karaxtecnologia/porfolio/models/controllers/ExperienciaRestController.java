@@ -3,6 +3,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,17 +30,18 @@ public class ExperienciaRestController {
 	public List<Experiencia> index(){
 		return experienciaService.findAll();
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/experiencias/{id}")
 	public Experiencia show(@PathVariable Long id) {
 		return experienciaService.findById(id);
 	}
+	@Secured("ROLE_ADMIN")
 	@PostMapping("experiencias")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Experiencia create(@RequestBody Experiencia experiencia) {
 		return experienciaService.save(experiencia);
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@PutMapping("/experiencias/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Experiencia update (@RequestBody Experiencia experiencia ,@PathVariable Long id){
@@ -55,7 +57,7 @@ public class ExperienciaRestController {
 		
 		return experienciaService.save(experienciaActual);
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@DeleteMapping("experiencias/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
