@@ -5,8 +5,8 @@ INSERT INTO competencias (habilidad,nivel,porciento,competencia_id) VALUES ('Fra
 INSERT INTO competencias (habilidad,nivel,porciento,competencia_id) VALUES ('Aleman','Principiante','50','1');
 INSERT INTO competencias (habilidad,nivel,porciento,competencia_id) VALUES ('Computacion','Alto','100','1');
 
-INSERT INTO proyectos (titulo,descripcion,link,imagen,proyecto_id) VALUES ('Decodificador','Emcrippador de Texto - Changelle Alura Oracle','//dfgjjgjdfiogjiodf','//klgjoijeoijgreijgreiojg','1');
-INSERT INTO proyectos (titulo,descripcion,link,imagen,proyecto_id) VALUES ('Profolio','Emcrippador de Texto - Changelle Alura Oracle','//dfgjjgjdfiogjiodf','//klgjoijeoijgreijgreiojg','1');
+INSERT INTO proyectos (titulo,descripcion,link,imagen,proyecto_id) VALUES ('Decodificador','Emcrippador de Texto - Changelle Alura Oracle','//dfgjjgjdfiogjiodf','https://user-images.githubusercontent.com/91544872/157673876-2c51fc09-5bed-48c0-aad3-97fc7fa64d1d.png','1');
+INSERT INTO proyectos (titulo,descripcion,link,imagen,proyecto_id) VALUES ('Profolio','Emcrippador de Texto - Changelle Alura Oracle','//dfgjjgjdfiogjiodf','https://user-images.githubusercontent.com/91544872/157673876-2c51fc09-5bed-48c0-aad3-97fc7fa64d1d.png','1');
 
 
 
