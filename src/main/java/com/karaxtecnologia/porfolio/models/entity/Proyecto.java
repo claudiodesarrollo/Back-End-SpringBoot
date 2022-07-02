@@ -20,6 +20,7 @@ public class Proyecto implements Serializable {
 	private String descripcion;
 	private String link;
 	private String imagen;
+	private int proyecto_id;
 
 	public Long getId() {
 		return id;
@@ -59,6 +60,14 @@ public class Proyecto implements Serializable {
 
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
+	}
+
+	public int getProyecto_id() {
+		return proyecto_id;
+	}
+
+	public void setProyecto_id(int proyecto_id) {
+		this.proyecto_id = proyecto_id;
 	}
 
 	private static final long serialVersionUID = 1L;

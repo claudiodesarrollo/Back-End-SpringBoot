@@ -12,4 +12,5 @@ public interface ICompetenciaService {
 	public Competencia save(Competencia competencia);
 
 	public void delete(Long id);
+	
 }

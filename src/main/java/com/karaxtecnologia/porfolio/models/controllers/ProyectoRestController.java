@@ -59,6 +59,7 @@ public class ProyectoRestController {
 		Proyecto proyectoNew = null;
 		Map<String, Object> response = new HashMap<>();
 		try {
+			proyecto.setProyecto_id(1);
 			proyectoNew = proyectoService.save(proyecto);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la base de datos");

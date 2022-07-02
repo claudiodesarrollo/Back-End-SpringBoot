@@ -57,6 +57,7 @@ public class FormacionRestController {
 		Formacion formacionNew =null;
 		Map<String, Object> response = new HashMap<>();
 		try {
+			formacion.setFormacion_id(1);
 			formacionNew = formacionService.save(formacion);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la base de datos");

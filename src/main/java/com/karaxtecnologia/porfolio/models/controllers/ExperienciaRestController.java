@@ -62,6 +62,7 @@ public class ExperienciaRestController {
 		Experiencia experienciaNew = null;
 		Map<String, Object> response = new HashMap<>();
 		try {
+			experiencia.setExperiencia_id(1);
 			experienciaNew = experienciaService.save(experiencia);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la base de datos");

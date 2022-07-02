@@ -17,6 +17,10 @@ public class Competencia implements Serializable{
 	private String habilidad;
 	private String nivel;
 	private Long porciento;
+	private int competencia_id;
+
+
+
 	public Long getId() {
 		return id;
 	}
@@ -47,6 +51,13 @@ public class Competencia implements Serializable{
 
 	public void setPorciento(Long porciento) {
 		this.porciento = porciento;
+	}
+	public int getCompetencia_id() {
+		return competencia_id;
+	}
+
+	public void setCompetencia_id(int i) {
+		this.competencia_id = i;
 	}
 
 	private static final long serialVersionUID = 1L;

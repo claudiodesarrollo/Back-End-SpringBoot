@@ -56,6 +56,7 @@ public class CompetenciaRestController {
 		Competencia competenciaNew =null;
 		Map<String, Object> response = new HashMap<>();
 		try {
+			competencia.setCompetencia_id(1);
 			competenciaNew = competenciaService.save(competencia);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la base de datos");

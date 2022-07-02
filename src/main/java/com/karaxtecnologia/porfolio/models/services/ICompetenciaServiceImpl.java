@@ -36,4 +36,6 @@ public class ICompetenciaServiceImpl implements ICompetenciaService {
 		competenciaDao.deleteById(id);
 	}
 
+
+
 }
