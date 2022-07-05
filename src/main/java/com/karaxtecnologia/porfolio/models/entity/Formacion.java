@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "formaciones")
@@ -19,8 +21,11 @@ public class Formacion implements Serializable {
 	private String titulo;
 	private String instituto;
 	@Column(name = "fecha_inicio")
+	@Temporal(TemporalType.DATE)
+
 	private Date fechaInicio;
 	@Column(name = "fecha_fin")
+	@Temporal(TemporalType.DATE)
 	private Date fechaFin;
 	private String descripcion;
 	private String localidad;
