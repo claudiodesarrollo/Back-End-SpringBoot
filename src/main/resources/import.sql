@@ -1,9 +1,9 @@
-INSERT INTO personas (apellido,dni,email,nombre,telefono,acerca,foto) VALUES('Quipildor','33648273','claudioq00@gmail.com','Claudio Angel Ivan','+542964352084','Full Stack Developer Jr .Con mas 10 anos de exprecia en atencion al publico ','8b3a87c7-d9bd-4135-9bd1-f6a0319dcfb9-2c29f1a5c7b4bf8b150739bdb5069853.jpg');
+INSERT INTO personas (apellido,dni,email,nombre,telefono,acerca,foto,ciudad) VALUES('Quipildor','33648273','claudioq00@gmail.com','Claudio Angel Ivan','+542964352084','Full Stack Developer Jr .Con mas 10 anos de exprecia en atencion al publico ','1d7db9bb-c39f-45f7-afe9-095a40a1aaa6-1625262658531.jpg','San Salvador de Jujuy');
 
 INSERT INTO competencias (habilidad,nivel,porciento,competencia_id) VALUES ('Ingles','Medio','75','1');
 INSERT INTO competencias (habilidad,nivel,porciento,competencia_id) VALUES ('Frances','Bajo','25','1');
-INSERT INTO competencias (habilidad,nivel,porciento,competencia_id) VALUES ('Aleman','Principiante','50','1');
-INSERT INTO competencias (habilidad,nivel,porciento,competencia_id) VALUES ('Computacion','Alto','100','1');
+INSERT INTO competencias (habilidad,nivel,porciento,competencia_id) VALUES ('Oratoria','Principiante','50','1');
+INSERT INTO competencias (habilidad,nivel,porciento,competencia_id) VALUES ('Liderazgo','Alto','100','1');
 
 INSERT INTO proyectos (titulo,descripcion,link,imagen,proyecto_id) VALUES ('Decodificador','Emcrippador de Texto - Changelle Alura Oracle','//dfgjjgjdfiogjiodf','https://user-images.githubusercontent.com/91544872/157673876-2c51fc09-5bed-48c0-aad3-97fc7fa64d1d.png','1');
 INSERT INTO proyectos (titulo,descripcion,link,imagen,proyecto_id) VALUES ('Profolio','Emcrippador de Texto - Changelle Alura Oracle','//dfgjjgjdfiogjiodf','https://user-images.githubusercontent.com/91544872/157673876-2c51fc09-5bed-48c0-aad3-97fc7fa64d1d.png','1');

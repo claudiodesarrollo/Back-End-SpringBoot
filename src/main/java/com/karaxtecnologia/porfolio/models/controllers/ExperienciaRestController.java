@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.karaxtecnologia.porfolio.models.entity.Experiencia;
 import com.karaxtecnologia.porfolio.models.services.IExperienciaService;
 
-@CrossOrigin(origins = { "http://localhost:4200" })
+@CrossOrigin(origins = { "https://porfolioclaudioq.web.app","*"})
 @RestController
 @RequestMapping("/porfolio")
 
@@ -62,7 +62,6 @@ public class ExperienciaRestController {
 		Experiencia experienciaNew = null;
 		Map<String, Object> response = new HashMap<>();
 		try {
-			experiencia.setExperiencia_id(1);
 			experienciaNew = experienciaService.save(experiencia);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la base de datos");
@@ -94,6 +93,7 @@ public class ExperienciaRestController {
 			experienciaActual.setFechaInicio(experiencia.getFechaInicio());
 			experienciaActual.setLocalidad(experiencia.getLocalidad());
 			experienciaActual.setPuesto(experiencia.getPuesto());
+			experienciaActual.setExperiencia_id(experiencia.getExperiencia_id());
 			experienciaUpdate = experienciaService.save(experienciaActual);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al actualizar en la base de datos");

@@ -36,7 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.karaxtecnologia.porfolio.models.entity.Persona;
 import com.karaxtecnologia.porfolio.models.services.IPersonaService;
 
-@CrossOrigin(origins = { "http://localhost:4200" })
+@CrossOrigin(origins = {"https://porfolioclaudioq.web.app","*"})
 @RestController
 @RequestMapping("/porfolio")
 public class PersonaRestController {
@@ -86,8 +86,8 @@ public class PersonaRestController {
 
 	@Secured("ROLE_ADMIN")
 	@PutMapping("/personas/{id}")
-
 	public ResponseEntity<?> update(@RequestBody Persona persona, @PathVariable Long id) {
+		
 		Persona personaActual = personaService.findById(id);
 		Persona personaUpdate = null;
 		Map<String, Object> response = new HashMap<>();
@@ -97,17 +97,18 @@ public class PersonaRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		try {
-			personaActual.setApellido(persona.getApellido());
+			/*personaActual.setApellido(persona.getApellido());
 			personaActual.setDni(persona.getDni());
 			personaActual.setEmail(persona.getEmail());
 			personaActual.setFoto(persona.getFoto());
 			personaActual.setTelefono(persona.getTelefono());
 			personaActual.setAcerca(persona.getAcerca());
 			personaActual.setBanner(persona.getBanner());
-			personaActual.setCompetencias(persona.getCompetencias());
+			personaActual.setCiudad(persona.getCiudad());
 			personaActual.setExperiencias(persona.getExperiencias());
 			personaActual.setFormaciones(persona.getFormaciones());
-			personaActual.setProyectos(persona.getProyectos());
+			personaActual.setProyectos(persona.getProyectos());*/
+			personaActual = persona;
 			personaUpdate = personaService.save(personaActual);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al actualizar en la base de datos");

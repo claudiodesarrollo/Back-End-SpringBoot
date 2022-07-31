@@ -39,6 +39,8 @@ public class Persona implements Serializable {
 	private String banner;
 
 	private String acerca;
+	
+	private String ciudad;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "experiencia_id")
@@ -165,6 +167,14 @@ public class Persona implements Serializable {
 
 	public void setBanner(String banner) {
 		this.banner = banner;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
 	}
 
 	private static final long serialVersionUID = 1L;

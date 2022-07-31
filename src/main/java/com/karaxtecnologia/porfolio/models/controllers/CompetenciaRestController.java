@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.karaxtecnologia.porfolio.models.entity.Competencia;
 import com.karaxtecnologia.porfolio.models.services.ICompetenciaService;
 
-@CrossOrigin(origins= {"http://localhost:4200"})
+@CrossOrigin(origins= {"https://porfolioclaudioq.web.app","*"})
 @RestController
 @RequestMapping("/porfolio")
 public class CompetenciaRestController {
@@ -51,12 +51,11 @@ public class CompetenciaRestController {
 	}
 	
 	@Secured("ROLE_ADMIN")
-	@PostMapping("competencias")
+	@PostMapping("/competencias")
 	public ResponseEntity<?> create(@RequestBody Competencia competencia) {
 		Competencia competenciaNew =null;
 		Map<String, Object> response = new HashMap<>();
 		try {
-			competencia.setCompetencia_id(1);
 			competenciaNew = competenciaService.save(competencia);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la base de datos");
@@ -86,6 +85,7 @@ public class CompetenciaRestController {
 			competenciaActual.setHabilidad(competencia.getHabilidad());
 			competenciaActual.setNivel(competencia.getNivel());
 			competenciaActual.setPorciento(competencia.getPorciento());
+			competenciaActual.setCompetencia_id(competencia.getCompetencia_id());
 			competenciaUpdate = competenciaService.save(competenciaActual);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al actualizar en la base de datos");
@@ -99,7 +99,7 @@ public class CompetenciaRestController {
 	}
 	
 	@Secured("ROLE_ADMIN")
-	@DeleteMapping("competencias/{id}")
+	@DeleteMapping("/competencias/{id}")
 	public ResponseEntity<?>  delete(@PathVariable Long id) {
 		Map<String,Object> response = new HashMap<>();
 		try {	

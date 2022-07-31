@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.karaxtecnologia.porfolio.models.entity.Proyecto;
 import com.karaxtecnologia.porfolio.models.services.IProyectoService;
 
-@CrossOrigin(origins = { "http://localhost:4200" })
+@CrossOrigin(origins = {"https://porfolioclaudioq.web.app","*"})
 @RestController
 @RequestMapping("/porfolio")
 public class ProyectoRestController {
@@ -59,7 +59,6 @@ public class ProyectoRestController {
 		Proyecto proyectoNew = null;
 		Map<String, Object> response = new HashMap<>();
 		try {
-			proyecto.setProyecto_id(1);
 			proyectoNew = proyectoService.save(proyecto);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la base de datos");
@@ -89,6 +88,7 @@ public class ProyectoRestController {
 			proyectoActual.setImagen(proyecto.getImagen());
 			proyectoActual.setLink(proyecto.getLink());
 			proyectoActual.setTitulo(proyecto.getTitulo());
+			proyectoActual.setProyecto_id(proyecto.getProyecto_id());
 			proyectoUpdate = proyectoService.save(proyectoActual);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al actualizar en la base de datos");

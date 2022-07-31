@@ -2,6 +2,7 @@ package com.karaxtecnologia.porfolio.models.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,12 +15,11 @@ public class Competencia implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	@Column
 	private String habilidad;
 	private String nivel;
 	private Long porciento;
 	private int competencia_id;
-
-
 
 	public Long getId() {
 		return id;

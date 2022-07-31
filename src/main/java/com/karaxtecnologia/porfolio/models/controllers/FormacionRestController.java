@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.karaxtecnologia.porfolio.models.entity.Formacion;
 import com.karaxtecnologia.porfolio.models.services.IFormacionService;
-@CrossOrigin(origins= {"http://localhost:4200"})
+@CrossOrigin(origins= {"https://porfolioclaudioq.web.app","*"})
 @RestController
 @RequestMapping("/porfolio")
 public class FormacionRestController {
@@ -57,7 +57,6 @@ public class FormacionRestController {
 		Formacion formacionNew =null;
 		Map<String, Object> response = new HashMap<>();
 		try {
-			formacion.setFormacion_id(1);
 			formacionNew = formacionService.save(formacion);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la base de datos");
@@ -87,6 +86,7 @@ public class FormacionRestController {
 				formacionActual.setInstituto(formacion.getInstituto());
 				formacionActual.setLocalidad(formacion.getLocalidad());
 				formacionActual.setTitulo(formacion.getTitulo());
+				formacionActual.setFormacion_id(formacion.getFormacion_id());
 				formacionUpdate = formacionService.save(formacionActual);
 			} catch (DataAccessException e) {
 				response.put("mensaje", "Error al actualizar en la base de datos");
