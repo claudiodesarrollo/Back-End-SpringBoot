@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.karaxtecnologia.porfolio.models.entity.Proyecto;
 import com.karaxtecnologia.porfolio.models.services.IProyectoService;
 
-@CrossOrigin(origins = {"https://porfolioclaudioq.web.app","*"})
+@CrossOrigin(origins = { "https://porfolioclaudioq.web.app", "*" })
 @RestController
 @RequestMapping("/porfolio")
 public class ProyectoRestController {

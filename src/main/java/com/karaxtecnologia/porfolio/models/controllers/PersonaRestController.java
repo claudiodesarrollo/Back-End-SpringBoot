@@ -1,19 +1,17 @@
 package com.karaxtecnologia.porfolio.models.controllers;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -35,14 +33,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.karaxtecnologia.porfolio.models.entity.Persona;
 import com.karaxtecnologia.porfolio.models.services.IPersonaService;
+import com.karaxtecnologia.porfolio.models.services.IUploadFileService;
 
-@CrossOrigin(origins = {"https://porfolioclaudioq.web.app","*"})
+@CrossOrigin(origins = { "https://porfolioclaudioq.web.app", "*" })
 @RestController
 @RequestMapping("/porfolio")
 public class PersonaRestController {
 
 	@Autowired
 	private IPersonaService personaService;
+	@Autowired
+	private IUploadFileService uploadService;
 
 	@GetMapping("/personas")
 	public List<Persona> index() {
@@ -87,7 +88,7 @@ public class PersonaRestController {
 	@Secured("ROLE_ADMIN")
 	@PutMapping("/personas/{id}")
 	public ResponseEntity<?> update(@RequestBody Persona persona, @PathVariable Long id) {
-		
+
 		Persona personaActual = personaService.findById(id);
 		Persona personaUpdate = null;
 		Map<String, Object> response = new HashMap<>();
@@ -97,17 +98,19 @@ public class PersonaRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		try {
-			/*personaActual.setApellido(persona.getApellido());
-			personaActual.setDni(persona.getDni());
-			personaActual.setEmail(persona.getEmail());
-			personaActual.setFoto(persona.getFoto());
-			personaActual.setTelefono(persona.getTelefono());
-			personaActual.setAcerca(persona.getAcerca());
-			personaActual.setBanner(persona.getBanner());
-			personaActual.setCiudad(persona.getCiudad());
-			personaActual.setExperiencias(persona.getExperiencias());
-			personaActual.setFormaciones(persona.getFormaciones());
-			personaActual.setProyectos(persona.getProyectos());*/
+			/*
+			 * personaActual.setApellido(persona.getApellido());
+			 * personaActual.setDni(persona.getDni());
+			 * personaActual.setEmail(persona.getEmail());
+			 * personaActual.setFoto(persona.getFoto());
+			 * personaActual.setTelefono(persona.getTelefono());
+			 * personaActual.setAcerca(persona.getAcerca());
+			 * personaActual.setBanner(persona.getBanner());
+			 * personaActual.setCiudad(persona.getCiudad());
+			 * personaActual.setExperiencias(persona.getExperiencias());
+			 * personaActual.setFormaciones(persona.getFormaciones());
+			 * personaActual.setProyectos(persona.getProyectos());
+			 */
 			personaActual = persona;
 			personaUpdate = personaService.save(personaActual);
 		} catch (DataAccessException e) {
@@ -123,74 +126,61 @@ public class PersonaRestController {
 	@Secured("ROLE_ADMIN")
 	@DeleteMapping("personas/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-		
-		Map<String,Object> response = new HashMap<>();
-		try {	
+
+		Map<String, Object> response = new HashMap<>();
+		try {
 			personaService.delete(id);
-		}catch(DataAccessException e){
+		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al Eliminar en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		response.put("mensaje", "El usuario ha sido eliminado con exito!");
-		return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
-
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/personas/upload")
-	public ResponseEntity<?> upload(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id") Long id) {
+	public ResponseEntity<?> upload(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id") Long id){
 		Map<String, Object> response = new HashMap<>();
-
+		
 		Persona persona = personaService.findById(id);
+		
+		if(!archivo.isEmpty()) {
 
-		if (!archivo.isEmpty()) {
-			String nombreArchivo = UUID.randomUUID().toString() + "-" + archivo.getOriginalFilename();
-			Path rutaArchivo = Paths.get("uploads").resolve(nombreArchivo).toAbsolutePath();
+			String nombreArchivo = null;
 			try {
-				Files.copy(archivo.getInputStream(), rutaArchivo);
+				nombreArchivo = uploadService.copiar(archivo);
 			} catch (IOException e) {
-				response.put("mensaje", "Error al subir la imagen " + nombreArchivo);
-
+				response.put("mensaje", "Error al subir la imagen del cliente");
 				response.put("error", e.getMessage().concat(": ").concat(e.getCause().getMessage()));
-
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
+			
 			String nombreFotoAnterior = persona.getFoto();
-			if (nombreFotoAnterior != null && nombreFotoAnterior.length() > 0) {
-				Path rutaFotoAnterior = Paths.get("uploads").resolve(nombreFotoAnterior).toAbsolutePath();
-				File archivoFotoAnterior = rutaFotoAnterior.toFile();
-				if (archivoFotoAnterior.exists() && archivoFotoAnterior.canRead()) {
-					archivoFotoAnterior.delete();
-				}
-			}
+			uploadService.eliminar(nombreFotoAnterior);	
 			persona.setFoto(nombreArchivo);
 			personaService.save(persona);
 			response.put("persona", persona);
-			response.put("mensaje", "El cliente ha sido actualizado con éxito! " + nombreArchivo);
-
+			response.put("mensaje", "Has subido correctamente la imagen: " + nombreArchivo);
+			
 		}
-
+		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
-
+	
 	@GetMapping("/uploads/img/{nombreFoto:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String nombreFoto) {
-		Path rutaArchivo = Paths.get("uploads").resolve(nombreFoto).toAbsolutePath();
 		Resource recurso = null;
 
 		try {
-			recurso = new UrlResource(rutaArchivo.toUri());
+			recurso = uploadService.cargar(nombreFoto);
 		} catch (MalformedURLException e) {
-
 			e.printStackTrace();
 		}
-		if (!recurso.exists() && !recurso.isReadable()) {
-			throw new RuntimeException("Error no se pudo cargar la imagen " + nombreFoto);
 
-		}
 		HttpHeaders cabecera = new HttpHeaders();
 		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
+
 		return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
 	}
-
 }

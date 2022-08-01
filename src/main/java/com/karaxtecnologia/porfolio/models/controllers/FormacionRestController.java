@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.karaxtecnologia.porfolio.models.entity.Formacion;
 import com.karaxtecnologia.porfolio.models.services.IFormacionService;
-@CrossOrigin(origins= {"https://porfolioclaudioq.web.app","*"})
+@CrossOrigin(origins= {"https://porfolioclaudioq.web.app", "*" })
 @RestController
 @RequestMapping("/porfolio")
 public class FormacionRestController {
